@@ -1,0 +1,46 @@
+SELECT
+	*
+FROM
+	iLabTP.Request r, iLabTP.Date_Authorised_Index da
+WHERE
+	r.Request_Row_ID = da.Request_Row_ID
+	AND
+	r.Consultant IN ('BARKS',
+'GEOR',
+'KALK',
+'ODUP',
+'QUE',
+'TAHIR',
+'XABEP',
+'GUPP',
+'PAND',
+'XCART',
+'AGNA',
+'AZAHAS',
+'CHAK',
+'GIR',
+'HONE',
+'HOW',
+'JNTOBS',
+'MIDWIF',
+'PAPA',
+'PATNI',
+'PRAD',
+'RPHLINK',
+'SHAR',
+'SING',
+'TRA',
+'ANW',
+'BARBE',
+'CON',
+'DASK',
+'GRI',
+'HOU',
+'HUTCH',
+'MATH',
+'MOL',
+'PORT',
+'SHAN',
+'SHANEI',
+'SUNGAR',
+'SET');

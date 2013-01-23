@@ -1,0 +1,12 @@
+SELECT
+	dri.Specimen_Number,dri.Namespace,r.Consultant,r.Location,
+	p.Registration_Number,rs.Set_Code,rs.Record_State, dri.Date_Received
+FROM
+	iLabTP.Date_Received_Index dri,iLabTP.Request r,iLabTP.Patient p,iLabTP.Result_Set rs
+WHERE 
+	datediff('dd',dri.Date_received,dateadd(dd,-1,Current_date)) < 7 AND
+	dri.Request_Row_ID =r.Request_Row_ID AND
+	r.Patient_Row_ID = p.patient_row_id AND
+	r.Location in ('AMU1','AMU2') AND
+	dri.Request_Row_ID = rs.Request_Row_ID AND
+	rs.Record_State not like 'A%'

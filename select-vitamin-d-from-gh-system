@@ -1,0 +1,17 @@
+SELECT
+	Test_Result.Result,
+	Test_Result.Test_Code,
+	Request.Date_Time_Received,
+	Request.Specimen_Number,
+	Patient.Postcode,
+	Patient.Registration_Number
+FROM
+	iLabTP.Test_Result Test_Result,
+	iLabTP.Result_Set Result_Set,
+	iLabTP.Request Request,
+	iLabTP.Patient Patient
+WHERE
+	Test_Result.Result_Set_Row_ID = Result_Set.Result_Set_Row_ID AND
+	Result_Set.Request_Row_ID = Request.Request_Row_ID AND
+	Request.Patient_Row_ID = Patient.Patient_Row_ID AND
+	Test_Result.Test_Code='NVITD'

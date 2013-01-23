@@ -1,0 +1,13 @@
+SELECT
+	r.Booking_In_Area, res.Set_Code, cons.Consultant_Code, cons.Consultant_Exp, cons.Medical_Specialty_Exp, r.Date_Received
+FROM
+	iLabTP.Request r , iLabTP.Ref_Consultant cons, iLabTP.Result_Set res
+WHERE
+	r.Request_Row_ID = res.Request_Row_ID
+	AND
+	r.Consultant = cons.Consultant_Code
+	AND
+	cons.Medical_Specialty IN ('OBS','GY','OB')
+	AND
+	r.Date_Time_Received between '2011-04-01' AND '2011-10-01'
+	;

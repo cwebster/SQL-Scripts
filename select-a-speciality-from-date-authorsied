@@ -1,0 +1,12 @@
+SELECT
+	*
+FROM
+	iLabTP.Request r, iLabTP.Date_Authorised_Index da, iLabTP.Ref_Consultant cons, iLabTP.Result_Set res
+WHERE
+	r.Request_Row_ID = da.Request_Row_ID
+	AND
+	da.Request_Row_ID = res.Request_Row_ID
+	AND
+	r.Consultant = cons.Consultant_Code
+	AND
+	cons.Medical_Specialty IN ('OBS','GY','OB');

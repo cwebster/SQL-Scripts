@@ -1,0 +1,11 @@
+SELECT 
+	count (rs.Date_Time_Booked_In) AS Number_Outstanding, 
+	rs.Set_Code, 
+	avg (DATEDIFF('hh',rs.Date_Time_Booked_In,current_timestamp)) as delay
+FROM
+	Request R
+	Outstanding_Work_Index owi
+	INNER JOIN Result_Set rs ON (owi.Request_Row_ID = R.Request_Row_ID
+                         	AND owi.Request_Row_ID = rs.Request_Row_ID)
+group by
+	rs.Set_Code order by Number_Outstanding DESC

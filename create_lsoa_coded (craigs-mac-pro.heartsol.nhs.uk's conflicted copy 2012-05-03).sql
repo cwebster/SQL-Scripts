@@ -1,0 +1,11 @@
+create table geocoding.tmp_lsoa_coded_tvitdn_gh_plus_heft
+	SELECT
+		tvitdn_gh_plus_heft_tvitdn_results_postcodes_only.Result,
+		tvitdn_gh_plus_heft_tvitdn_results_postcodes_only.Req_Postcode,
+		nhs_postcode_lookup.UnitPostCodeVar,
+		nhs_postcode_lookup.LSOA
+	FROM
+		geocoding.tvitdn_gh_plus_heft_tvitdn_results_postcodes_only tvitdn_gh_plus_heft_tvitdn_results_postcodes_only,
+		geocoding.nhs_postcode_lookup nhs_postcode_lookup
+	WHERE
+		tvitdn_gh_plus_heft_tvitdn_results_postcodes_only.Req_Postcode = nhs_postcode_lookup.UnitPostCodeVar

@@ -1,0 +1,22 @@
+SELECT
+	Date_Authorised_Index.Date_Authorised,
+	Date_Authorised_Index.Registration_Number,
+	Date_Authorised_Index.Specimen_Number,
+	Result_Set.Set_Code,
+	Patient.Consultant,
+	Patient.DoB,
+	Patient.Location,
+	Test_Result.Result,
+	Test_Result.Result_Comment,
+	Test_Result.Test_Code,
+	Test_Result.Units
+FROM
+	iLabTP.Date_Authorised_Index Date_Authorised_Index,
+	iLabTP.Result_Set Result_Set,
+	iLabTP.Patient Patient,
+	iLabTP.Test_Result Test_Result
+WHERE
+	Date_Authorised_Index.Patient_Row_ID = Patient.Patient_Row_ID AND
+	Date_Authorised_Index.Request_Row_ID = Result_Set.Request_Row_ID AND
+	Result_Set.Result_Set_Row_ID = Test_Result.Result_Set_Row_ID AND
+	Result_Set.Set_Code = 'TNT'

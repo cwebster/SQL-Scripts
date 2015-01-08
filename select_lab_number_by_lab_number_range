@@ -1,0 +1,18 @@
+SELECT * FROM Date_Received_Index, iLabTP.Request
+WHERE
+Date_Received_Index.Date_Received > DATEADD('dd',-2,CURRENT_DATE) AND
+Request.Request_Row_ID = Date_Received_Index.Request_Row_ID AND
+CAST((SUBSTRING(Date_Received_Index.Specimen_Number,6,7)) AS INT) > 361234 AND
+CAST((SUBSTRING(Date_Received_Index.Specimen_Number,6,7)) AS INT) < 6050830
+
+
+OR
+
+SELECT Date_Received_Index.Specimen_Number, Ref_User.Full_Name , Request.Location, Request.Date_Time_Received, Request.Date_Time_Collected, Result_Set.Date_Time_Booked_In, Result_Set.Date_Time_Authorised
+FROM Date_Received_Index, iLabTP.Request, Result_Set, Ref_User
+WHERE
+Date_Received_Index.Date_Received > DATEADD('dd',-2,CURRENT_DATE) AND
+Request.Request_Row_ID = Date_Received_Index.Request_Row_ID AND
+Result_Set.Request_Row_ID = Date_Received_Index.Request_Row_ID AND
+Request.Specimen_Details_Booked_By = Ref_User.User_ID 
+GROUP BY Date_Received_Index.Specimen_Number

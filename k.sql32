@@ -1,0 +1,13 @@
+SELECT Result, Result_Comment, Result_Comment_Exp
+	, Result_Exp, Results_Sequence_No, Short_Exp, Test_Code, Test_Exp, Test_Row_ID, Units, Result_Set.Set_Code
+	, Request.Date_Time_Collected, Request.Date_Time_Received
+	, Result_Set.Date_Time_Authorised, Result_Set.Date_Booked_In
+	, Date_Received_Index.Discipline, Date_Received_Index.Namespace 
+	
+FROM iLabTP.Test_Result, iLabTP.Result_Set, iLabTP.Date_Received_Index, Request
+WHERE Date_Received_Index.Date_Received between '2019-03-01' AND '2019-03-02' AND
+Date_Received_Index.Namespace = 'CHM' AND
+Test_Result.Test_Code = 'K' AND
+Date_Received_Index.Request_Row_ID = Result_Set.Request_Row_ID AND
+Date_Received_Index.Request_Row_ID = Request.Request_Row_ID AND
+Test_Result.Result_Set_Row_ID  = Result_Set.Result_Set_Row_ID

@@ -1,0 +1,2 @@
+Ref_Location.Location_Group_Code
+

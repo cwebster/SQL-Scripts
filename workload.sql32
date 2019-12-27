@@ -1,0 +1,8 @@
+SELECT {fn YEAR(Date_Received_Index.Date_Received)} AS YEAR, {fn MONTH(Date_Received_Index.Date_Received)} AS MONTH, Test_Result.Test_Row_ID, COUNT (DISTINCT Date_Received_Index.Specimen_Number) AS Count_Of_Tests
+FROM iLabTP.Date_Received_Index, iLabTP.Result_Set, iLabTP.Test_Result
+WHERE Date_Received_Index.Date_Received >= '2019-05-01'
+AND Date_Received_Index.Date_Received < '2019-05-23'
+AND Date_Received_Index.Discipline LIKE 'C'
+AND Date_Received_Index.Request_Row_ID = Result_Set.Request_Row_ID
+AND Result_Set.Result_Set_Row_ID = Test_Result.Result_Set_Row_ID
+GROUP BY {fn YEAR(Date_Received_Index.Date_Received)}, {fn MONTH(Date_Received_Index.Date_Received)}, Test_Result.Test_Row_ID

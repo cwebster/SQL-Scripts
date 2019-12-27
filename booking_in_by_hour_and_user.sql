@@ -1,4 +1,5 @@
--- SQL provides details of booking in per hour of day and by Booking in User. Change Date_Received_Index.Date_Received = '2011-02-25' date to select different day
+-- SQL provides details of booking in per hour of day and by Booking in User. 
+-- Change Date_Received_Index.Date_Received = '2011-02-25' date to select different day
 SELECT HourOfDay, Count(BookingUser) as NumberBookedByUser, BookingUser, Name FROM (
 SELECT
 	Count(Date_Received_Index.Registration_Number) as NumberBooked,

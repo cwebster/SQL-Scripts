@@ -1,0 +1,9 @@
+SELECT dri.Specimen_Number, Result, Result_Comment, Result_Comment_Exp
+	, Result_Exp, Short_Exp, Test_Code, r.Date_Time_Collected, r.Date_Time_Received, dri.Date_Received
+FROM iLabTP.Test_Result, iLabTP.Result_Set, iLabTP.Date_Received_Index dri
+LEFT OUTER JOIN iLabTP.Request r ON dri.Request_Row_ID = r.Request_Row_ID
+LEFT OUTER JOIN iLabTP.Test_Result t ON r.Result_Set_Row_ID = t.Result_Set_Row_ID 
+WHERE 
+Test_Result.Test_Code ='Na' AND
+dri.Namespace = 'CHM' AND
+dri.Date_Received between '2019-03-01' AND '2019-03-02'

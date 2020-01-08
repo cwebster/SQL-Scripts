@@ -1,25 +1,23 @@
-SELECT
-    Request.Specimen_Number,
-    Result_Set.Set_Code,
+SELECT 
     Date_Received_Index.Date_Received,
     Date_Received_Index.Discipline,
-    Request.Location,
     Request.Specimen_Details_Booked_By,
     Result_Set.Date_Time_Booked_In,
     Result_Set.Date_Booked_In,
-    MAX (DATEDIFF('mi',Request.Date_Time_Received, Result_Set.Date_Time_Authorised)) as MinsIn,
-    Result_Set.Date_Time_Authorised,
-    Request.Date_Time_Collected,
+    AVG(DATEDIFF('mi',Request.Date_Time_Received, Result_Set.Date_Time_Authorised)) as MinsIn,
+    Result_Set.Date_Time_Authorised, 
+    Request.Date_Time_Collected, 
     Request.Date_Time_Received,
-    LIST(DISTINCT Result_Set.Set_Code) AS AllSets,
-    LIST(((DATEDIFF('mi',Request.Date_Time_Received, Result_Set.Date_Time_Authorised)))) AS AllMinsIn From
+    LIST(Date_Received_Index.Specimen_Number) AS AllSpecimenNumbers
+From 
     iLabTP.Date_Received_Index
     LEFT JOIN Request ON Date_Received_Index.Request_Row_ID = Request.Request_Row_ID
-    INNER JOIN Result_Set ON Date_Received_Index.Request_Row_ID = Result_Set.Request_Row_ID WHERE
+    INNER JOIN Result_Set ON Date_Received_Index.Request_Row_ID = Result_Set.Request_Row_ID 
+WHERE 
     DATEDIFF('D',Date_Received_Index.Date_Received,current_timestamp) < 30
-    AND Date_Received_Index.Discipline IN ('C','H')
-    AND Location = 'ED'
-    AND Result_Set.Set_Code IN ('REN2','PRO2') GROUP BY
-	Request.Specimen_Number
-ORDER BY
-    Result_Set.Date_Time_Booked_IN, Request.Specimen_Number
+    AND Date_Received_Index.Discipline = 'C'
+    AND Result_Set.Set_Code = 'PROL1'
+GROUP BY 
+    Date_Received_Index.Specimen_Number
+ORDER BY 
+    Result_Set.Date_Time_Booked_In

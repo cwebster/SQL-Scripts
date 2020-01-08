@@ -1,0 +1,16 @@
+SELECT 		COUNT(Distinct Date_Received_Index.Specimen_Number) AS NumberOfTests,
+            Date_Received_Index.Discipline,
+            Request.Analytical_Category,
+            Ref_Location.Lab_Statistics_Group_Code,
+            Ref_Location.Unit_Location_Group
+FROM         
+            Result_Set
+            LEFT JOIN Test_Result ON Result_Set.Result_Set_Row_ID = Test_Result.Result_Set_Row_ID
+            INNER JOIN Date_Received_Index ON (Date_Received_Index.Request_Row_ID = Result_Set.Request_Row_ID)
+            INNER JOIN iLabTP.Request ON (Result_Set.Request_Row_ID = Request.Request_Row_ID)
+            INNER JOIN iLabTP.Ref_Location ON (iLabTP.Ref_Location.Location_Row_ID = Request.Location_Row_ID)
+WHERE         
+            Date_Received_Index.Date_Received >= '2018-04-01'
+			AND Date_Received_Index.Date_Received < '2019-04-01'
+
+group by Date_Received_Index.Discipline, Request.Analytical_Category, Ref_Location.Unit_Location_Group

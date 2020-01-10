@@ -1,7 +1,9 @@
 SELECT 	Test_Code, 
 		COUNT(Test_Code) As Workload,
 		Quarter,
-		Unit_Location_Group
+		Unit_Location_Group,
+		Analytical_Category,
+		Lab_Statistics_Group_Code
 		
 FROM
 		(SELECT 
@@ -33,4 +35,4 @@ FROM
 WHERE
 		Date_Received >= '2019-04-01'
 		AND Date_Received < '2019-12-31'
-GROUP BY 	Unit_Location_Group, Quarter, Test_Code
+GROUP BY 	Unit_Location_Group, Quarter, Test_Code, Analytical_Category, Lab_Statistics_Group_Code

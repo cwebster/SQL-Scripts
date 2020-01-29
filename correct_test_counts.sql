@@ -3,7 +3,10 @@ SELECT 	Test_Code,
 		Quarter,
 		Unit_Location_Group,
 		Analytical_Category,
-		Lab_Statistics_Group_Code
+		Lab_Statistics_Group_Code, 
+		Disc,
+		Set_Code,
+		Lab_Section
 		
 FROM
 		(SELECT 
@@ -34,5 +37,5 @@ FROM
 			Date_Received_Index.Specimen_Number, Test_Result.Test_Code)
 WHERE
 		Date_Received >= '2019-04-01'
-		AND Date_Received < '2019-12-31'
-GROUP BY 	Unit_Location_Group, Quarter, Test_Code, Analytical_Category, Lab_Statistics_Group_Code
+		AND Date_Received < '2020-03-31'
+GROUP BY 	Unit_Location_Group, Quarter, Test_Code, Analytical_Category, Lab_Statistics_Group_Code, Disc
